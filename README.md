@@ -41,9 +41,9 @@ var css = lazycss({
 })
 ```
 ###### Result
-```javascript
+```CSS
 // css.raw
-".container {
+.container {
 	height:400px;
 	background-color:rgba(170,187,204,0.86);
 }
@@ -64,9 +64,9 @@ var css = lazycss({
 	width:calc(100% - 200px);
 	height:100%;
 	background-color:lightgreen;
-}"
-css.minified
-".container{height:400px;background-color:rgba(170,187,204,0.86);}.container:hover{background-color:rgba(221,34,51,0.86);}.container *{box-sizing:border-box;}.container .sidebar{display:inline-block;width:200px;height:100%;background-color:green;}.container .main{display:inline-block;width:calc(100%-200px);height:100%;background-color:lightgreen;}"
+}
+//css.minified
+.container{height:400px;background-color:rgba(170,187,204,0.86);}.container:hover{background-color:rgba(221,34,51,0.86);}.container *{box-sizing:border-box;}.container .sidebar{display:inline-block;width:200px;height:100%;background-color:green;}.container .main{display:inline-block;width:calc(100%-200px);height:100%;background-color:lightgreen;}
 ```
 
 ## Motivation
