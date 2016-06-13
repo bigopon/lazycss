@@ -87,11 +87,6 @@ npm i lazycss
 
 1. Create new style holder
 ```javascript
-/**
- * @param name {String} tag name of the root dom element
- * @param defs {Object} options for root element, className, id, children etc... 
- * @return {DOM}
- */
 var css = lazycss(defs)
 // append a style element to document head if not appended, else edit text content
 // future change only part of text that was changed in css object
