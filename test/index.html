@@ -6,41 +6,30 @@
     <body>
         <script>
             document.body.className = 'd-tab-ct'
-            var css = window.temp1 = lazycss({
-                '.d-tab-ct': {
+            var css = lazycss({
+                '.container': {
                     height: 400,
-                    backgroundColor: '#aabbccee'
-                },
-                '.d-tab-btnbar': {
-                    height: 34,
-                },
-                '.d-tab-btn': {
-                    display: 'inline-block',
-                    padding: '4px 8px',
+                    backgroundColor: '#aabbccdd',
                     hover: {
-                        width: 100,
+                    backgroundColor: '#dd2233dd'
                     },
-                    before: {
-                        width: 200
+                    '*': {
+                    boxSizing: 'border-box'
                     },
-                    active: {
-                        color: 'red'
+                    '.sidebar': {
+                    display: 'inline-block',
+                    width: 200,
+                    height: '100%',
+                    backgroundColor: 'green'
                     },
-                    'first-child': {
-                        background: 'red'
-                    },
-                    '&:last-child': {
-                        background: 'blue'
+                    '.main': {
+                    display: 'inline-block',
+                    width: -200,
+                    height: '100%',
+                    'background-color': 'lightgreen'
                     }
-                },
-                '.d-tab-tabs-ct': {
-                    height: 400 - 34
-                },
-                '.d-tab-tab': {
-                    height: 400 - 34,
-                    background: 'lightgreen'
                 }
-            })
+                })
             css.append()
         </script>
     </body>

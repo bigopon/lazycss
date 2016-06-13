@@ -1,6 +1,6 @@
 {
   "name": "lazycss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Javascript powered css",
   "main": "src/lazycss.js",
   "scripts": {

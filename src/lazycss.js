@@ -1,6 +1,6 @@
 (function() {
     var defProp = Object.defineProperty
-    var depProps = Object.defineProperties
+    var defProps = Object.defineProperties
     var pxStyle = ['width', 'height', 'maxWidth', 'minWidth', 'maxHeight', 'minHeight']
     !['', 'Top', 'Right', 'Bottom', 'Left'].forEach(function (pos) {
         pxStyle.push('padding' + pos)
@@ -22,6 +22,7 @@
     var positionPsuedoRegex = /^(nth|last|first|only|out|in|read|not)/
     var colorRegex = /color$/i
     var hexRegex = /^#?[0-9a-f]/i
+    var noSpaceRegex = /\s/g
     var specialChar0 = ['.', '#', ' ', '>', '[', '*']
 
     function up2(str) {
@@ -51,17 +52,17 @@
     }
 
     function rv2str(rule, value) {
-        return c2d(rule) + ':' + value + '; '
+        return '\t' + c2d(rule) + ':' + value + ';\n'
     }
     function rv2strCH(rule, value) {
-        return c2d(rule) + ':' + h2r(value) + '; '
+        return '\t' + c2d(rule) + ':' + h2r(value) + ';\n'
     }
     /**
      * @param rule {string}
      * @param value {string|number}
      */
     function rv2strN(rule, value) {
-        return c2d(rule) + ':' + (isNaN(value) ? value : (value < 0? ('calc(100% - ' + Math.abs(value) + 'px)') : (value + 'px'))) + '; '
+        return '\t' + c2d(rule) + ':' + (isNaN(value) ? value : (value < 0? ('calc(100% - ' + Math.abs(value) + 'px)') : (value + 'px'))) + ';\n'
     }
     function add(holder, selector, style) {
         holder[selector] = (holder[selector] || '') + style
@@ -251,16 +252,27 @@
     var LazyCss = function(defs, uniq) {
         var holder = translate(defs, uniq)
         var lazycss = { __proto__: null }
-        depProps(holder, {
+        defProps(holder, {
             css: {
+                value: function() {
+                    return { minified: this.minified, raw: this.raw }
+                }
+            },
+            minified: {
                 get: function() {
                     var style = ''
                     forEach(this.styles, function(st, sel) {
-                        style += sel + '{' + st + '}'
+                        style += sel + '{' + st.replace(noSpaceRegex, '') + '}'
                     })
-                    // this.styles.forEach(function (st) {
-                    //     style += toStyle(st)
-                    // })
+                    return style
+                }
+            },
+            raw: {
+                get: function() {
+                    var style = ''
+                    forEach(this.styles, function(st, sel) {
+                        style += sel + ' {\n\t' + st + '\n}\n'
+                    })
                     return style
                 }
             },
@@ -269,7 +281,7 @@
                     if (this.appended)
                         this.holder.textContent = this.css
                     else
-                        this.holder = append(this.css)
+                        this.holder = append(this.css.minified)
                 }
             }
         })
