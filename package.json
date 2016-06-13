@@ -1,12 +1,12 @@
 {
   "name": "lazycss",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Javascript powered css",
   "main": "src/lazycss.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "beautify": "uglifyjs src/lazycss.js -o dist/lazycss.js -b space-colon=true,semicolons=false,quote_style=1,indent-level=4",
-    "minify": "uglifyjs src/lazycss.js -o dist/lazycss.min.js -c dead_code,unused,booleans,loops,join_vars,drop_debugger,drop_console,sequences -m",
+    "minify": "uglifyjs src/lazycss.js -o dist/lazycss.min.js -c dead_code,unused,booleans,loops,join_vars,drop_debugger,drop_console,sequences -m -b beautify=false",
     "prepublish": "npm run beautify && npm run minify"
   },
   "keywords": [

@@ -19,7 +19,7 @@
     var positionPsuedoRegex = /^(nth|last|first|only|out|in|read|not)/;
     var colorRegex = /color$/i;
     var hexRegex = /^#?[0-9a-f]/i;
-    var noSpaceRegex = /\s/g;
+    var noSpaceRegex = /\t|\n|:\s/g;
     var specialChar0 = [ '.', '#', ' ', '>', '[', '*' ];
     function up2(str) {
         return str[1].toUpperCase();
@@ -46,13 +46,13 @@
         return dest;
     }
     function rv2str(rule, value) {
-        return '	' + c2d(rule) + ':' + value + ';\n';
+        return '	' + c2d(rule) + ': ' + value + ';\n';
     }
     function rv2strCH(rule, value) {
-        return '	' + c2d(rule) + ':' + h2r(value) + ';\n';
+        return '	' + c2d(rule) + ': ' + h2r(value) + ';\n';
     }
     function rv2strN(rule, value) {
-        return '	' + c2d(rule) + ':' + (isNaN(value) ? value : value < 0 ? 'calc(100% - ' + Math.abs(value) + 'px)' : value + 'px') + ';\n';
+        return '	' + c2d(rule) + ': ' + (isNaN(value) ? value : value < 0 ? 'calc(100% - ' + Math.abs(value) + 'px)' : value + 'px') + ';\n';
     }
     function add(holder, selector, style) {
         holder[selector] = (holder[selector] || '') + style;
@@ -203,6 +203,9 @@
             fn.call(thisArg, object[key], key);
         }
     }
+    function removeWS(str) {
+        return str.charAt(0) === ':' ? ':' : '';
+    }
     var LazyCss = function(defs, uniq) {
         var holder = translate(defs, uniq);
         var lazycss = {
@@ -221,7 +224,7 @@
                 get: function() {
                     var style = '';
                     forEach(this.styles, function(st, sel) {
-                        style += sel + '{' + st.replace(noSpaceRegex, '') + '}';
+                        style += sel + '{' + st.replace(noSpaceRegex, removeWS) + '}';
                     });
                     return style;
                 }
@@ -230,6 +233,7 @@
                 get: function() {
                     var style = '';
                     forEach(this.styles, function(st, sel) {
+                        var newLine = insertNewLineRegex.source;
                         style += sel + ' {\n	' + st + '\n}\n';
                     });
                     return style;
@@ -238,6 +242,7 @@
             append: {
                 value: function() {
                     if (this.appended) this.holder.textContent = this.minified; else this.holder = append(this.minified);
+                    return this;
                 }
             }
         });

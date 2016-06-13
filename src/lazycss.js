@@ -22,7 +22,7 @@
     var positionPsuedoRegex = /^(nth|last|first|only|out|in|read|not)/
     var colorRegex = /color$/i
     var hexRegex = /^#?[0-9a-f]/i
-    var noSpaceRegex = /\s/g
+    var noSpaceRegex = /\t|\n|:\s/g
     var specialChar0 = ['.', '#', ' ', '>', '[', '*']
 
     function up2(str) {
@@ -52,17 +52,17 @@
     }
 
     function rv2str(rule, value) {
-        return '\t' + c2d(rule) + ':' + value + ';\n'
+        return '\t' + c2d(rule) + ': ' + value + ';\n'
     }
     function rv2strCH(rule, value) {
-        return '\t' + c2d(rule) + ':' + h2r(value) + ';\n'
+        return '\t' + c2d(rule) + ': ' + h2r(value) + ';\n'
     }
     /**
      * @param rule {string}
      * @param value {string|number}
      */
     function rv2strN(rule, value) {
-        return '\t' + c2d(rule) + ':' + (isNaN(value) ? value : (value < 0? ('calc(100% - ' + Math.abs(value) + 'px)') : (value + 'px'))) + ';\n'
+        return '\t' + c2d(rule) + ': ' + (isNaN(value) ? value : (value < 0? ('calc(100% - ' + Math.abs(value) + 'px)') : (value + 'px'))) + ';\n'
     }
     function add(holder, selector, style) {
         holder[selector] = (holder[selector] || '') + style
@@ -248,7 +248,10 @@
             fn.call(thisArg, object[key], key)
         }
     }
-
+    function removeWS(str) {
+        return str.charAt(0) === ':' ? ':' : '' 
+    }
+    
     var LazyCss = function(defs, uniq) {
         var holder = translate(defs, uniq)
         var lazycss = { __proto__: null }
@@ -262,7 +265,7 @@
                 get: function() {
                     var style = ''
                     forEach(this.styles, function(st, sel) {
-                        style += sel + '{' + st.replace(noSpaceRegex, '') + '}'
+                        style += sel + '{' + st.replace(noSpaceRegex, removeWS) + '}'
                     })
                     return style
                 }
@@ -271,7 +274,8 @@
                 get: function() {
                     var style = ''
                     forEach(this.styles, function(st, sel) {
-                        style += sel + ' {\n\t' + st + '\n}\n'
+                        var newLine = insertNewLineRegex.source
+                        style += sel + ' {\n\t' + st + '\n}\n' 
                     })
                     return style
                 }
@@ -282,6 +286,7 @@
                         this.holder.textContent = this.minified
                     else
                         this.holder = append(this.minified)
+                    return this
                 }
             }
         })
