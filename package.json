@@ -1,6 +1,6 @@
 {
   "name": "lazycss",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "Javascript powered css",
   "main": "src/lazycss.js",
   "scripts": {
@@ -15,6 +15,10 @@
     "jscss",
     "j2c"
   ],
-  "author": "bigopon",
-  "license": "MIT"
+  "author": "bigopon <bigopon.777@gmail.com> (http://bigopon.surge.sh)",
+  "license": "MIT",
+  "repository": {
+    "url": "bigopon/lazycss",
+    "type": "git"
+  }
 }

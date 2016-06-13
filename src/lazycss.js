@@ -251,7 +251,6 @@
     var LazyCss = function(defs, uniq) {
         var holder = translate(defs, uniq)
         var lazycss = { __proto__: null }
-        console.log(holder)
         depProps(holder, {
             css: {
                 get: function() {
