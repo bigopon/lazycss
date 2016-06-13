@@ -10,7 +10,5 @@ book.json
 bower.json
 jsconfig.json
 coverage
-dist
 docs
-src
 webpack.config.js

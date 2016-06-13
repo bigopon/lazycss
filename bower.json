@@ -1,10 +1,4 @@
 {
   "name": "lazycss",
-  "version": "0.0.2",
-  "keywords": [
-    "lazycss",
-    "js2css",
-    "jscss",
-    "j2c"
-  ]
+  "version": "0.0.5"
 }

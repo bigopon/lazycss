@@ -210,7 +210,7 @@
         };
         defProps(holder, {
             css: {
-                value: function() {
+                get: function() {
                     return {
                         minified: this.minified,
                         raw: this.raw
@@ -237,7 +237,7 @@
             },
             append: {
                 value: function() {
-                    if (this.appended) this.holder.textContent = this.css; else this.holder = append(this.css.minified);
+                    if (this.appended) this.holder.textContent = this.minified; else this.holder = append(this.minified);
                 }
             }
         });

@@ -254,7 +254,7 @@
         var lazycss = { __proto__: null }
         defProps(holder, {
             css: {
-                value: function() {
+                get: function() {
                     return { minified: this.minified, raw: this.raw }
                 }
             },
@@ -279,9 +279,9 @@
             append: {
                 value: function() {
                     if (this.appended)
-                        this.holder.textContent = this.css
+                        this.holder.textContent = this.minified
                     else
-                        this.holder = append(this.css.minified)
+                        this.holder = append(this.minified)
                 }
             }
         })
