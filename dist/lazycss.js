@@ -233,7 +233,6 @@
                 get: function() {
                     var style = '';
                     forEach(this.styles, function(st, sel) {
-                        var newLine = insertNewLineRegex.source;
                         style += sel + ' {\n	' + st + '\n}\n';
                     });
                     return style;

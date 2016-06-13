@@ -274,8 +274,7 @@
                 get: function() {
                     var style = ''
                     forEach(this.styles, function(st, sel) {
-                        var newLine = insertNewLineRegex.source
-                        style += sel + ' {\n\t' + st + '\n}\n' 
+                        style += sel + ' {\n\t' + st + '\n}\n'
                     })
                     return style
                 }
