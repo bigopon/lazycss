@@ -71,6 +71,8 @@ var css = lazycss({
 
 ## Motivation
 - Too lazy to switch files & context to do job
+- Like to write `hover` instead `:hover`
+- Wanted hex with alpha channel
 
 
 ## Installation
