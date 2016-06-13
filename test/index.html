@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Test</title>
+        <script src='../src/lazycss.js'></script>
+    </head>
+    <body>
+        <script>
+            document.body.className = 'd-tab-ct'
+            var css = window.temp1 = lazycss({
+                '.d-tab-ct': {
+                    height: 400,
+                    backgroundColor: '#aabbccee'
+                },
+                '.d-tab-btnbar': {
+                    height: 34,
+                },
+                '.d-tab-btn': {
+                    display: 'inline-block',
+                    padding: '4px 8px',
+                    hover: {
+                        width: 100,
+                    },
+                    before: {
+                        width: 200
+                    },
+                    active: {
+                        color: 'red'
+                    },
+                    'first-child': {
+                        background: 'red'
+                    },
+                    '&:last-child': {
+                        background: 'blue'
+                    }
+                },
+                '.d-tab-tabs-ct': {
+                    height: 400 - 34
+                },
+                '.d-tab-tab': {
+                    height: 400 - 34,
+                    background: 'lightgreen'
+                }
+            })
+            css.append()
+        </script>
+    </body>
+</html>

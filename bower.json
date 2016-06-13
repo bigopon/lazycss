@@ -1,0 +1,10 @@
+{
+  "version": "0.1.1",
+  "keywords": [
+    "lazycss",
+    "js2css",
+    "jscss",
+    "j2c"
+  ],
+  "main": "src/lazycss.js"
+}
